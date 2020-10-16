@@ -21,4 +21,21 @@ public class Item {
 
 
 
+    public String getName(){
+        return name ;
+    }
+
+    public String getStatus(){
+        return status ;
+    }
+    public String getShopName(){
+        return shopName ;
+    }
+    public String getDetails(){
+        return details ;
+    }
+    public String getQuantity(){
+        return quantity ;
+    }
+
 }
