@@ -13,85 +13,104 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ItemsViewHolder0> {
-
-
-
-    List<Item> items = Arrays.asList(new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ),
-    new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ),
-    new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ));
-
-
+public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    List<Item> items = new ArrayList<>();
     List<String> shops = new ArrayList<>();
 
-
-    private void getShops(){
-        for(int i = 0 ; i < items.size() ; i++){
-            if(!shops.contains(items.get(i).getShopName())){
-                shops.add(items.get(i).getShopName());
-            }
-        }
-    }
-
-
-
-    ShoppingAdapter(){
+    ShoppingAdapter() {
+        items.add(new Item("Potato", "laham", "1.5 kg", "not token", "no details"));
+        items.add(new Item("Potato", "Vegetative", "1.5 kg", "not token", "no details"));
+        items.add(new Item("pencil", "library", "1", "not token", "maped "));
         getShops();
+
     }
+
 
     @NonNull
     @Override
-    public ShoppingAdapter.ItemsViewHolder0 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+        switch (viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent , false);
-        return new ItemsViewHolder0(view);
+            case 0:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
+                return new itemsViewHolder(view);
+            case 1:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_row, parent, false);
+                return new shopsViewHolder(view);
+
+        }
+        return null;
     }
-
-
 
     @Override
-    public void onBindViewHolder(@NonNull ShoppingAdapter.ItemsViewHolder0 holder, int position) {
-
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Item current = items.get(position);
-        holder.item_name.setText(current.getName());
-        holder.details.setText(current.getDetails());
-        holder.quantity.setText(current.getQuantity());
-        holder.status.setText(current.getStatus());
+        switch (holder.getItemViewType()) {
+            case 0:
+                itemsViewHolder viewHolder0 = (itemsViewHolder) holder;
+                viewHolder0.item_name.setText(current.getName());
+                viewHolder0.details.setText(current.getDetails());
+                viewHolder0.quantity.setText(current.getQuantity());
+                viewHolder0.status.setText(current.getStatus());
+                break;
 
+            case 1:
+                shopsViewHolder viewHolder1 = (shopsViewHolder) holder;
+                viewHolder1.shop.setText(current.getShopName());
+
+                break;
+        }
 
     }
-
 
     @Override
     public int getItemCount() {
         return items.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+
+        return items.get(position).getName().equals("") ? 1 : 0;
+    }
+
+    public void getShops() {
+
+        for (int i = 0; i < items.size(); i++) {
+            if (!shops.contains(items.get(i).getShopName()))
+                shops.add(items.get(i).getShopName());
+        }
+
+        for (int i = 0; i < shops.size(); i++) {
+            items.add(new Item("", shops.get(i), "", "", ""));
+        }
+    }
 
 
+    private class itemsViewHolder extends RecyclerView.ViewHolder {
 
-    public  class ItemsViewHolder0 extends RecyclerView.ViewHolder {
+        TextView item_name, details, quantity, status;
 
-        TextView item_name , details ,quantity, status;
-
-
-        ItemsViewHolder0(View view){
+        public itemsViewHolder(@NonNull View view) {
             super(view);
             item_name = view.findViewById(R.id.item_name_text_view);
             details = view.findViewById(R.id.details_text_view);
             quantity = view.findViewById(R.id.quantity_text_view);
             status = view.findViewById(R.id.status_text_view);
-
-
         }
-
-
-
-
-
     }
 
+    private class shopsViewHolder extends RecyclerView.ViewHolder {
 
+        TextView shop;
 
+        public shopsViewHolder(@NonNull View view) {
+            super(view);
+            shop = view.findViewById(R.id.shop_text_view);
+
+        }
+    }
 
 }
+

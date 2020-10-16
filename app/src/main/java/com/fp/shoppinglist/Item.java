@@ -9,6 +9,7 @@ public class Item {
     private String details ;
 
 
+
     public Item ( String name, String shopName, String quantity, String status, String details ){
         this.name= name ;
         this.status = status ;
@@ -16,7 +17,9 @@ public class Item {
         this.details = details ;
         this.quantity = quantity ;
 
+
     }
+
 
 
 
