@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "230018887623",
+    "firebase_url": "https://shopping-list-edad7.firebaseio.com",
+    "project_id": "shopping-list-edad7",
+    "storage_bucket": "shopping-list-edad7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230018887623:android:6a7bce60b17a3f9c0fb3e2",
+        "android_client_info": {
+          "package_name": "com.fp.shoppinglist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230018887623-9aett51hesqo4g85a8rt7f5evbjn87op.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-mrvhWEnZyjrgRwovIlteib4nYs9KAt0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230018887623-9aett51hesqo4g85a8rt7f5evbjn87op.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
