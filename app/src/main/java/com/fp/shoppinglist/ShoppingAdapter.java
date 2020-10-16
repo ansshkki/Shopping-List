@@ -18,9 +18,14 @@ public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     List<String> shops = new ArrayList<>();
 
     ShoppingAdapter() {
-        items.add(new Item("Potato", "laham", "1.5 kg", "not token", "no details"));
-        items.add(new Item("Potato", "Vegetative", "1.5 kg", "not token", "no details"));
-        items.add(new Item("pencil", "library", "1", "not token", "maped "));
+        items.add(new Item("Potato", "Vegetative", "2 kg", "token by anas", "choose big potato"));
+        items.add(new Item("tomato", "Vegetative", "1.5 kg", "not token", "horanic"));
+        items.add(new Item("pencil", "library", "3", "token by mo", "claro"));
+        items.add(new Item("meat", "welder", "2 kg", "not token", "for kebbeh"));
+        items.add(new Item("panadol", "pharmacy", "1", "token by anas", "red extra"));
+
+
+
         getShops();
         sequenceList();
 
@@ -73,7 +78,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
 
-        return items.get(position).getName().equals("") ? 1 : 0;
+        return items.get(position).getQuantity().equals("0") ? 1 : 0;
     }
 
     public void getShops() {
@@ -84,9 +89,36 @@ public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
         for (int i = 0; i < shops.size(); i++) {
-            items.add(new Item("", shops.get(i), "", "", ""));
+            items.add(new Item("", shops.get(i), "0", "", ""));
         }
     }
+
+
+
+    private void sequenceList (){
+        List<Item> temp = new ArrayList<>();
+
+        for(int j = 0; j < shops.size() ; j++) {
+            String shopName = shops.get(j);
+            temp.add(new Item("", shops.get(j), "0", "", ""));
+
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).getShopName().equals(shopName) && !items.get(i).getQuantity().equals("0"))
+                    temp.add(items.get(i));
+            }
+        }
+
+        items = temp ;
+
+
+    }
+
+
+
+
+
+
+
 
 
     private class itemsViewHolder extends RecyclerView.ViewHolder {
@@ -115,23 +147,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 
 
-    private void sequenceList (){
-        List<Item> temp = new ArrayList<>();
 
-        for(int j = 0; j < shops.size() ; j++) {
-            String shopName = shops.get(j);
-            temp.add(new Item("", shops.get(j), "", "", ""));
-
-            for (int i = 0; i < items.size(); i++) {
-                if (items.get(i).getShopName().equals(shopName) && !items.get(i).getName().equals(""))
-                    temp.add(items.get(i));
-            }
-        }
-
-        items = temp ;
-
-
-    }
 
 }
 
