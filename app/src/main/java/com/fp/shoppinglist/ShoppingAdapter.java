@@ -16,9 +16,9 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ItemsV
 
 
 
-    List<Item> items = Arrays.asList(new Item("Potato", "Vegetative" ,"1.5 kg" ,"not tookes" , "no detailes" ),
-    new Item("Potato", "Vegetative" ,"1.5 kg" ,"not tookes" , "no detailes" ),
-    new Item("Potato", "Vegetative" ,"1.5 kg" ,"not tookes" , "no detailes" ));
+    List<Item> items = Arrays.asList(new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ),
+    new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ),
+    new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ));
 
 
     @NonNull
