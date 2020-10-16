@@ -22,6 +22,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         items.add(new Item("Potato", "Vegetative", "1.5 kg", "not token", "no details"));
         items.add(new Item("pencil", "library", "1", "not token", "maped "));
         getShops();
+        sequenceList();
 
     }
 
@@ -110,6 +111,26 @@ public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             shop = view.findViewById(R.id.shop_text_view);
 
         }
+    }
+
+
+
+    private void sequenceList (){
+        List<Item> temp = new ArrayList<>();
+
+        for(int j = 0; j < shops.size() ; j++) {
+            String shopName = shops.get(j);
+            temp.add(new Item("", shops.get(j), "", "", ""));
+
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).getShopName().equals(shopName) && !items.get(i).getName().equals(""))
+                    temp.add(items.get(i));
+            }
+        }
+
+        items = temp ;
+
+
     }
 
 }
