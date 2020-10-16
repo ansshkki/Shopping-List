@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    ShoppingAdapter adapter;
-    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -19,11 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        adapter= new ShoppingAdapter();
-        layoutManager = new LinearLayoutManager(this);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new ShoppingAdapter());
+        recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
 
     }
