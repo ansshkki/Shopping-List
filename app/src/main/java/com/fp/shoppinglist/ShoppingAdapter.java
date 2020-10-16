@@ -43,6 +43,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ItemsV
 
     }
 
+
     @Override
     public int getItemCount() {
         return items.size();
