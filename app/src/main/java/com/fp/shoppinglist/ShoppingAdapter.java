@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,23 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingAdapter.ItemsV
     new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ),
     new Item("Potato", "Vegetative" ,"1.5 kg" ,"not token" , "no details" ));
 
+
+    List<String> shops = new ArrayList<>();
+
+
+    private void getShops(){
+        for(int i = 0 ; i < items.size() ; i++){
+            if(!shops.contains(items.get(i).getShopName())){
+                shops.add(items.get(i).getShopName());
+            }
+        }
+    }
+
+
+
+    ShoppingAdapter(){
+        getShops();
+    }
 
     @NonNull
     @Override
