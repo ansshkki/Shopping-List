@@ -32,6 +32,11 @@ public class itemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
+    public void AddItemsToAdapter(List<Item> list){
+        items.addAll(list);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

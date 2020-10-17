@@ -3,18 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".addItems"
-    android:layoutDirection="ltr">
+    android:layoutDirection="ltr"
+ >
+
 
 
     <LinearLayout
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="64dp"
-    android:layout_gravity="center">
+    android:layoutDirection="ltr">
+
+
 
 <LinearLayout
     android:weightSum="10"
@@ -32,6 +38,7 @@
         android:textColor="#000000" />
 
     <EditText
+        android:id="@+id/itemNameNew_ET"
         android:layout_weight="6.5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"/>
@@ -55,6 +62,7 @@
                 android:text="Shop name"/>
 
             <EditText
+                android:id="@+id/shopNameNew_ET"
                 android:layout_weight="6.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
@@ -76,6 +84,7 @@
                 android:text="Quantity"/>
 
             <EditText
+                android:id="@+id/quantityNew_ET"
                 android:layout_weight="6.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
@@ -97,11 +106,57 @@
                 android:text="Details"/>
 
             <EditText
+                android:id="@+id/detailsNew_ET"
                 android:layout_weight="6.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 
+
+
+
         </LinearLayout>
+
+
+
+        <Button
+            android:onClick="addToNew"
+            android:layout_marginTop="8dp"
+            android:textColor="#FFFFFF"
+            android:text="+"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 </LinearLayout>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/new_items_recycler_view"/>
+
+
+
+    </LinearLayout>
+
 </LinearLayout>
+
+

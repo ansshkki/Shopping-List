@@ -10,22 +10,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    itemsListAdapter adapter ;
+    List<Item> newItems  = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        adapter = new itemsListAdapter();
         recyclerView = findViewById(R.id.recyclerView);
 
-        recyclerView.setAdapter(new itemsListAdapter());
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        super.onResume();
+        newItems =(ArrayList<Item>) getIntent().getSerializableExtra("newItems");
+
+        if(newItems != null)
+            adapter.AddItemsToAdapter(newItems);
+
+    }
+
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
