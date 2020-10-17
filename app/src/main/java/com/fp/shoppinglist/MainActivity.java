@@ -3,15 +3,12 @@ package com.fp.shoppinglist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.time.Instant;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        recyclerView.setAdapter(new ShoppingAdapter());
+        recyclerView.setAdapter(new itemsListAdapter());
         recyclerView.setLayoutManager( new LinearLayoutManager(this));
 
 
@@ -46,4 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

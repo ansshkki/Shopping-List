@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ShoppingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class itemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Item> items = new ArrayList<>();
     List<String> shops = new ArrayList<>();
 
-    ShoppingAdapter() {
+    itemsListAdapter() {
         items.add(new Item("Potato", "Vegetative", "2 kg", "token by anas", "choose big potato"));
         items.add(new Item("tomato", "Vegetative", "1.5 kg", "not token", "horanic"));
         items.add(new Item("pencil", "library", "3", "token by mo", "claro"));
