@@ -24,28 +24,6 @@ public class addItems extends AppCompatActivity  {
     RecyclerView recyclerView ;
 
 
-
-    public void saveList (List<Item> list , String mainKey){
-        Intent intent = new Intent(this ,MainActivity.class);
-        intent.putExtra(mainKey+"ListSize",list.size()) ;
-
-        for(int i = 0 ; i < list.size() ; i++){
-            Item temp = list.get(i) ;
-            intent.putExtra(mainKey+"Name"+i ,temp.getName()) ;
-            intent.putExtra(mainKey+"ShopName"+i ,temp.getShopName()) ;
-            intent.putExtra(mainKey+"Quantity"+i ,temp.getQuantity()) ;
-            intent.putExtra(mainKey+"Details"+i ,temp.getDetails()) ;
-        }
-
-
-        startActivity(intent);
-
-
-    }
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +41,21 @@ public class addItems extends AppCompatActivity  {
 
     }
 
+    public void saveList (List<Item> list , String mainKey){
 
+        Intent intent = new Intent(this ,MainActivity.class);
+        intent.putExtra(mainKey+"ListSize",list.size()) ;
+
+        for(int i = 0 ; i < list.size() ; i++){
+            Item temp = list.get(i) ;
+            intent.putExtra(mainKey+"Name"+i ,temp.getName()) ;
+            intent.putExtra(mainKey+"ShopName"+i ,temp.getShopName()) ;
+            intent.putExtra(mainKey+"Quantity"+i ,temp.getQuantity()) ;
+            intent.putExtra(mainKey+"Details"+i ,temp.getDetails()) ;
+        }
+
+        startActivity(intent);
+    }
     public void addToNew(View view) {
 
         itemNameNew =  itemNameNew_ET.getText().toString();
@@ -73,29 +65,19 @@ public class addItems extends AppCompatActivity  {
 
         adapter.addItemsToAdapter(itemNameNew , shopNameNew ,quantityNew ,detailsNew);
 
-
         itemNameNew_ET.setText("");
         shopNameNew_ET.setText("");
         quantityNew_ET.setText("");
         detailsNew_ET.setText("");
-
-
     }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
        getMenuInflater().inflate(R.menu.add_items_activity_menu , menu);
         return super.onCreateOptionsMenu(menu);
     }
-
-
-
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         List<Item> list = adapter.getNewItems();
-        Intent i = new Intent(this, MainActivity.class);
-
-
         saveList(list,"newItems");
 
         return super.onOptionsItemSelected(item);

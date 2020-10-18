@@ -16,7 +16,19 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
 
     List<Item> newItems = new ArrayList<>();
 
+    public static class newItemsViewHolder extends RecyclerView.ViewHolder{
 
+        TextView item_name, details, quantity ;
+        ImageView imageView ;
+        public newItemsViewHolder(@NonNull View view) {
+            super(view);
+            item_name = view.findViewById(R.id.new_item_name_text_view);
+            details = view.findViewById(R.id.new_details_text_view);
+            quantity = view.findViewById(R.id.new_quantity_text_view);
+            imageView = view.findViewById(R.id.delete);
+
+        }
+    }
 
     public void addItemsToAdapter ( String name, String shopName, String quantity, String details ){
 
@@ -25,8 +37,6 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
 
         notifyDataSetChanged();
     }
-
-
     public List<Item> getNewItems (){ return newItems ; }
 
 
@@ -43,12 +53,9 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
         holder.details.setText(current.getDetails());
         holder.item_name.setText(current.getName());
         holder.quantity.setText(current.getQuantity());
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newItems.remove(position) ;
-                notifyDataSetChanged();
-            }
+        holder.imageView.setOnClickListener(view -> {
+            newItems.remove(position) ;
+            notifyDataSetChanged();
         });
 
     }
@@ -56,20 +63,6 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
     @Override
     public int getItemCount() {
         return newItems.size();
-    }
-
-    public class newItemsViewHolder extends RecyclerView.ViewHolder{
-
-        TextView item_name, details, quantity ;
-        ImageView imageView ;
-        public newItemsViewHolder(@NonNull View view) {
-            super(view);
-            item_name = view.findViewById(R.id.new_item_name_text_view);
-            details = view.findViewById(R.id.new_details_text_view);
-            quantity = view.findViewById(R.id.new_quantity_text_view);
-            imageView = view.findViewById(R.id.delete);
-
-        }
     }
 
 
