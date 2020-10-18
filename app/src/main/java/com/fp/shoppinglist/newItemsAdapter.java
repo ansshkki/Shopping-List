@@ -3,6 +3,7 @@ package com.fp.shoppinglist;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,14 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
         holder.details.setText(current.getDetails());
         holder.item_name.setText(current.getName());
         holder.quantity.setText(current.getQuantity());
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newItems.remove(position) ;
+                notifyDataSetChanged();
+            }
+        });
+
     }
 
     @Override
@@ -52,11 +61,13 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
     public class newItemsViewHolder extends RecyclerView.ViewHolder{
 
         TextView item_name, details, quantity ;
+        ImageView imageView ;
         public newItemsViewHolder(@NonNull View view) {
             super(view);
             item_name = view.findViewById(R.id.new_item_name_text_view);
             details = view.findViewById(R.id.new_details_text_view);
             quantity = view.findViewById(R.id.new_quantity_text_view);
+            imageView = view.findViewById(R.id.delete);
 
         }
     }

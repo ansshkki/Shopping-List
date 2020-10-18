@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
             tempList.add(temp);
         }
 
-
-
     }
 
 

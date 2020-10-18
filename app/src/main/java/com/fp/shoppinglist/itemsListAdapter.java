@@ -59,6 +59,7 @@ public class itemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return null;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Item current = items.get(position);

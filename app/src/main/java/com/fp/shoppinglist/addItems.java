@@ -73,6 +73,13 @@ public class addItems extends AppCompatActivity  {
 
         adapter.addItemsToAdapter(itemNameNew , shopNameNew ,quantityNew ,detailsNew);
 
+
+        itemNameNew_ET.setText("");
+        shopNameNew_ET.setText("");
+        quantityNew_ET.setText("");
+        detailsNew_ET.setText("");
+
+
     }
 
 
