@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,13 +14,38 @@ import android.view.View;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class addItems extends AppCompatActivity {
+public class addItems extends AppCompatActivity  {
 
     EditText itemNameNew_ET , shopNameNew_ET ,quantityNew_ET,detailsNew_ET ;
     String itemNameNew , shopNameNew ,quantityNew,detailsNew ;
     newItemsAdapter adapter ;
     RecyclerView recyclerView ;
+
+
+
+    public void saveListToSP (List<Item> list , String mainKey){
+        SharedPreferences sp = getSharedPreferences(mainKey , MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(mainKey+"ListSize",list.size()) ;
+
+        for(int i = 0 ; i < list.size() ; i++){
+            Item temp = list.get(i) ;
+            editor.putString(mainKey+"Name"+i ,temp.getName()) ;
+            editor.putString(mainKey+"ShopName"+i ,temp.getShopName()) ;
+            editor.putString(mainKey+"Quantity"+i ,temp.getQuantity()) ;
+            editor.putString(mainKey+"Details"+i ,temp.getDetails()) ;
+        }
+        editor.apply();
+
+
+
+
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +86,13 @@ public class addItems extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(item.getItemId() == R.id.Done){
-            Intent i = new Intent(this , MainActivity.class);
-            i.putExtra("newItems" , (ArrayList)adapter.getNewItems());
-            startActivity(i);
-        }
+        List<Item> list = adapter.getNewItems();
+        Intent i = new Intent(this, MainActivity.class);
+
+
+        saveListToSP(list,"newItems");
+
+        startActivity(i);
 
         return super.onOptionsItemSelected(item);
     }

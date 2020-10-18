@@ -13,7 +13,7 @@ import java.util.List;
 
 public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newItemsViewHolder> {
 
-    ArrayList<Item> newItems = new ArrayList<>();
+    List<Item> newItems = new ArrayList<>();
 
 
 
@@ -26,7 +26,7 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
     }
 
 
-    public ArrayList<Item> getNewItems (){ return newItems ;}
+    public List<Item> getNewItems (){ return newItems ; }
 
 
     @NonNull

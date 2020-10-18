@@ -1,6 +1,7 @@
 package com.fp.shoppinglist;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,36 @@ public class MainActivity extends AppCompatActivity {
     itemsListAdapter adapter ;
     List<Item> newItems  = new ArrayList<>();
 
+
+
+    private void readListFromSP(String mainKey , List<Item> tempList){
+
+
+        tempList.clear();
+
+        SharedPreferences sp = getSharedPreferences(mainKey, MODE_PRIVATE);
+
+        int size = sp.getInt(mainKey+"ListSize" , 0);
+        for (int i = 0 ; i < size ; i++) {
+
+            Item temp = new Item(sp.getString(mainKey+"Name"+i ,"ERROR")
+                            ,sp.getString(mainKey+"ShopName"+i ,"ERROR")
+                            ,sp.getString(mainKey+"Quantity"+i+i ,"ERROR")
+                            ,"not token"
+                            , sp.getString(mainKey+"Details"+i,""));
+
+
+            tempList.add(temp);
+        }
+
+
+
+    }
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -33,15 +64,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
-    protected void onRestart() {
-        super.onRestart();
-
+    protected void onResume() {
         super.onResume();
-        newItems =(ArrayList<Item>) getIntent().getSerializableExtra("newItems");
 
-        if(newItems != null)
-            adapter.AddItemsToAdapter(newItems);
+
+        readListFromSP("newItems" ,newItems);
+        adapter.AddItemsToAdapter(newItems);
 
     }
 

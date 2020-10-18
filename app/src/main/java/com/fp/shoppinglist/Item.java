@@ -1,6 +1,8 @@
 package com.fp.shoppinglist;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item  {
 
     private String name;
     private String shopName;
@@ -27,7 +29,6 @@ public class Item {
     public String getName(){
         return name ;
     }
-
     public String getStatus(){
         return status ;
     }

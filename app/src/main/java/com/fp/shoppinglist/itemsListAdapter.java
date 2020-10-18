@@ -33,8 +33,10 @@ public class itemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     public void AddItemsToAdapter(List<Item> list){
+        if(list != null){
         items.addAll(list);
         notifyDataSetChanged();
+        }
     }
 
     @NonNull
