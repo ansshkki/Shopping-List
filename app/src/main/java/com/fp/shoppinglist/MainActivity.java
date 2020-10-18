@@ -22,21 +22,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void readListFromSP(String mainKey , List<Item> tempList){
+    private void readList(String mainKey , List<Item> tempList){
 
 
         tempList.clear();
 
-        SharedPreferences sp = getSharedPreferences(mainKey, MODE_PRIVATE);
 
-        int size = sp.getInt(mainKey+"ListSize" , 0);
+
+        int size = getIntent().getIntExtra(mainKey+"ListSize" , 0);
         for (int i = 0 ; i < size ; i++) {
 
-            Item temp = new Item(sp.getString(mainKey+"Name"+i ,"ERROR")
-                            ,sp.getString(mainKey+"ShopName"+i ,"ERROR")
-                            ,sp.getString(mainKey+"Quantity"+i ,"ERROR")
+            Item temp = new Item(getIntent().getStringExtra(mainKey + "Name" + i)
+                            ,getIntent().getStringExtra(mainKey+"ShopName"+i)
+                            ,getIntent().getStringExtra(mainKey+"Quantity"+i)
                             ,"not token"
-                            , sp.getString(mainKey+"Details"+i,""));
+                            , getIntent().getStringExtra(mainKey+"Details"+i));
 
 
             tempList.add(temp);
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
 
-        readListFromSP("newItems" ,newItems);
+        readList("newItems" ,newItems);
         adapter.AddItemsToAdapter(newItems);
 
     }

@@ -32,8 +32,9 @@
         android:gravity="center" />
 
     <ImageView
+        android:layout_margin="8dp"
         android:onClick="delete"
-        android:background="@color/purple_500"
+        android:background="@drawable/trash"
         android:id="@+id/delete"
         android:layout_width="0dp"
         android:layout_height="match_parent"

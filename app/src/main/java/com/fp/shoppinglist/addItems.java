@@ -25,21 +25,20 @@ public class addItems extends AppCompatActivity  {
 
 
 
-    public void saveListToSP (List<Item> list , String mainKey){
-        SharedPreferences sp = getSharedPreferences(mainKey , MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putInt(mainKey+"ListSize",list.size()) ;
+    public void saveList (List<Item> list , String mainKey){
+        Intent intent = new Intent(this ,MainActivity.class);
+        intent.putExtra(mainKey+"ListSize",list.size()) ;
 
         for(int i = 0 ; i < list.size() ; i++){
             Item temp = list.get(i) ;
-            editor.putString(mainKey+"Name"+i ,temp.getName()) ;
-            editor.putString(mainKey+"ShopName"+i ,temp.getShopName()) ;
-            editor.putString(mainKey+"Quantity"+i ,temp.getQuantity()) ;
-            editor.putString(mainKey+"Details"+i ,temp.getDetails()) ;
+            intent.putExtra(mainKey+"Name"+i ,temp.getName()) ;
+            intent.putExtra(mainKey+"ShopName"+i ,temp.getShopName()) ;
+            intent.putExtra(mainKey+"Quantity"+i ,temp.getQuantity()) ;
+            intent.putExtra(mainKey+"Details"+i ,temp.getDetails()) ;
         }
-        editor.apply();
 
 
+        startActivity(intent);
 
 
     }
@@ -90,9 +89,7 @@ public class addItems extends AppCompatActivity  {
         Intent i = new Intent(this, MainActivity.class);
 
 
-        saveListToSP(list,"newItems");
-
-        startActivity(i);
+        saveList(list,"newItems");
 
         return super.onOptionsItemSelected(item);
     }
