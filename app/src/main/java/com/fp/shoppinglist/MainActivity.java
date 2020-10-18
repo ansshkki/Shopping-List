@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
             Item temp = new Item(sp.getString(mainKey+"Name"+i ,"ERROR")
                             ,sp.getString(mainKey+"ShopName"+i ,"ERROR")
-                            ,sp.getString(mainKey+"Quantity"+i+i ,"ERROR")
+                            ,sp.getString(mainKey+"Quantity"+i ,"ERROR")
                             ,"not token"
                             , sp.getString(mainKey+"Details"+i,""));
 
