@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.organizeList();
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         /*
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
          * Only for testing login screen, comment it to access the rest of the application
          */
         //if (mAuth.getCurrentUser() == null)
-        startActivity(new Intent(this, LoginActivity.class));
+        //startActivity(new Intent(this, LoginActivity.class));
     }
 
     protected void onResume() {

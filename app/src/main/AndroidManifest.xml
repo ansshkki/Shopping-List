@@ -12,7 +12,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="Login" />
-        <activity android:name=".addItems" />
+        <activity android:name=".addItems"
+            android:label="Add items"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
