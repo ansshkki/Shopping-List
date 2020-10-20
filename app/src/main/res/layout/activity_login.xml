@@ -42,7 +42,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:maxLength="15"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
 
