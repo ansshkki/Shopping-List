@@ -17,7 +17,6 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     TextInputEditText editTextEmail, editTextPassword;
-    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +26,9 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.email_edit_text);
         editTextPassword = findViewById(R.id.password_edit_text);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Logging in...");
-        progressDialog.setCancelable(false);
     }
 
-    public void userLogin(View view) {
+    public void login(View view) {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -61,6 +56,9 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Logging in...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
@@ -68,12 +66,15 @@ public class LoginActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 finish();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             } else {
-                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    public void goToSignUp(View view) {
+        startActivity(new Intent(this, SignUpActivity.class));
+        finish();
+    }
 }

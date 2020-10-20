@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,16 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0, size = getIntent().getIntExtra(mainKey + "ListSize", 0); i < size; i++) {
 
-            Item temp = new Item(getIntent().getStringExtra(mainKey + "Name" + i)
-                    , getIntent().getStringExtra(mainKey + "ShopName" + i)
-                    , getIntent().getStringExtra(mainKey + "Quantity" + i)
-                    , "not taken"
-                    , getIntent().getStringExtra(mainKey + "Details" + i));
+            Item temp = new Item(getIntent().getStringExtra(mainKey + "Name" + i),
+                    getIntent().getStringExtra(mainKey + "ShopName" + i),
+                    getIntent().getStringExtra(mainKey + "Quantity" + i),
+                    "not taken",
+                    getIntent().getStringExtra(mainKey + "Details" + i));
 
             tempList.add(temp);
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
          * Only for testing login screen, comment it to access the rest of the application
          */
         //if (mAuth.getCurrentUser() == null)
-        //startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     protected void onResume() {
