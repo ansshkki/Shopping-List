@@ -82,7 +82,6 @@ public class addItems extends AppCompatActivity {
             correctInput = false;
         }
 
-
         if (correctInput) {
 
             adapter.addItemsToAdapter(itemNameNew, shopNameNew, quantityNew, detailsNew);
@@ -92,6 +91,7 @@ public class addItems extends AppCompatActivity {
             quantityNew_ET.setText("");
             detailsNew_ET.setText("");
         }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
