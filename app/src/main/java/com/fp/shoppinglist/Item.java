@@ -18,13 +18,7 @@ public class Item  {
         this.shopName = shopName;
         this.details = details ;
         this.quantity = quantity ;
-
-
     }
-
-
-
-
 
     public String getName(){
         return name ;

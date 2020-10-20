@@ -16,10 +16,11 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
 
     List<Item> newItems = new ArrayList<>();
 
-    public static class newItemsViewHolder extends RecyclerView.ViewHolder{
+    public static class newItemsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView item_name, details, quantity ;
-        ImageView imageView ;
+        TextView item_name, details, quantity;
+        ImageView imageView;
+
         public newItemsViewHolder(@NonNull View view) {
             super(view);
             item_name = view.findViewById(R.id.new_item_name_text_view);
@@ -30,14 +31,19 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
         }
     }
 
-    public void addItemsToAdapter ( String name, String shopName, String quantity, String details ){
+    public void addItemsToAdapter(String name, String shopName, String quantity, String details) {
+        if (details.equals("")) {
+            details = "no details";
+        }
 
-        Item item = new Item( name, shopName, quantity,"not token",details ) ;
+        Item item = new Item(name, shopName, quantity, "not taken", details);
         newItems.add(item);
 
         notifyDataSetChanged();
     }
-    public List<Item> getNewItems (){ return newItems ; }
+    public List<Item> getNewItems() {
+        return newItems;
+    }
 
 
     @NonNull
@@ -54,7 +60,7 @@ public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newIte
         holder.item_name.setText(current.getName());
         holder.quantity.setText(current.getQuantity());
         holder.imageView.setOnClickListener(view -> {
-            newItems.remove(position) ;
+            newItems.remove(position);
             notifyDataSetChanged();
         });
 

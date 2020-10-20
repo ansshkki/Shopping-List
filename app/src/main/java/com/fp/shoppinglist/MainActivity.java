@@ -1,7 +1,6 @@
 package com.fp.shoppinglist;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             Item temp = new Item(getIntent().getStringExtra(mainKey + "Name" + i)
                     , getIntent().getStringExtra(mainKey + "ShopName" + i)
                     , getIntent().getStringExtra(mainKey + "Quantity" + i)
-                    , "not token"
+                    , "not taken"
                     , getIntent().getStringExtra(mainKey + "Details" + i));
 
             tempList.add(temp);
