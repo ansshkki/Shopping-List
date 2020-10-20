@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,23 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     itemsListAdapter adapter;
     List<Item> newItems = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        adapter = new itemsListAdapter();
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter.organizeList();
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+        setSupportActionBar(toolbar);
+    }
 
     private void readList(String mainKey, List<Item> tempList) {
 
@@ -35,28 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
             tempList.add(temp);
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        adapter = new itemsListAdapter();
-        recyclerView = findViewById(R.id.recyclerView);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        adapter.organizeList();
-
-        /*
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-         * Only for testing login screen, comment it to access the rest of the application
-         */
-        //if (mAuth.getCurrentUser() == null)
-        startActivity(new Intent(this, LoginActivity.class));
     }
 
     protected void onResume() {
@@ -79,12 +77,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         if (item.getItemId() == R.id.add_item) {
             Intent i = new Intent(this, addItems.class);
             startActivity(i);
+        } else if (item.getItemId() == R.id.sign_out) {
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

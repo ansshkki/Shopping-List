@@ -5,7 +5,10 @@
     <item
         android:id="@+id/add_item"
         android:title="add"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/sign_out"
+        android:title="Sign Out" />
 
 </menu>
