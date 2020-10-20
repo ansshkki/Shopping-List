@@ -21,7 +21,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    itemsListAdapter adapter;
+    ItemsListAdapter adapter;
     List<Item> newItems = new ArrayList<>();
 
     @Override
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapter = new itemsListAdapter();
+        adapter = new ItemsListAdapter();
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.add_item) {
-            Intent i = new Intent(this, addItems.class);
+            Intent i = new Intent(this, AddItemsActivity.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.sign_out) {
             FirebaseAuth.getInstance().signOut();

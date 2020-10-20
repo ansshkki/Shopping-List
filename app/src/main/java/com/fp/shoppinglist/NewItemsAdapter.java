@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class newItemsAdapter extends RecyclerView.Adapter<newItemsAdapter.newItemsViewHolder> {
+public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.newItemsViewHolder> {
 
     List<Item> newItems = new ArrayList<>();
 

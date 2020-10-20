@@ -1,10 +1,5 @@
 package com.fp.shoppinglist;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,13 +7,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
-public class addItems extends AppCompatActivity {
+public class AddItemsActivity extends AppCompatActivity {
 
     EditText itemNameNew_ET, shopNameNew_ET, quantityNew_ET, detailsNew_ET;
     String itemNameNew, shopNameNew, quantityNew, detailsNew;
-    newItemsAdapter adapter;
+    NewItemsAdapter adapter;
     RecyclerView recyclerView;
 
 
@@ -32,7 +33,7 @@ public class addItems extends AppCompatActivity {
         quantityNew_ET = findViewById(R.id.quantityNew_ET);
         detailsNew_ET = findViewById(R.id.detailsNew_ET);
 
-        adapter = new newItemsAdapter();
+        adapter = new NewItemsAdapter();
         recyclerView = findViewById(R.id.new_items_recycler_view);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -42,6 +43,7 @@ public class addItems extends AppCompatActivity {
     public void saveList(List<Item> list, String mainKey) {
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(mainKey + "ListSize", list.size());
 
         for (int i = 0; i < list.size(); i++) {

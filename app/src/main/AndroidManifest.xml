@@ -23,7 +23,7 @@
             android:name=".LoginActivity"
             android:label="Login" />
         <activity
-            android:name=".addItems"
+            android:name=".AddItemsActivity"
             android:label="Add items" />
         <activity
             android:name=".MainActivity"
