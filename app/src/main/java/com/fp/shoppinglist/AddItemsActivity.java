@@ -132,10 +132,11 @@ public class AddItemsActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        List<Item> list = adapter.getNewItems();
-        saveList(list, "newItems");
-
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.Done) {
+            List<Item> list = adapter.getNewItems();
+            saveList(list, "newItems");
+            return true;
+        }
+        return false;
     }
 }

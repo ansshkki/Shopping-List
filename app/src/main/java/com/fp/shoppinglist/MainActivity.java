@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private void readList(String mainKey, List<Item> tempList) {
+    /*private void readList(String mainKey, List<Item> tempList) {
 
         tempList.clear();
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
             tempList.add(temp);
         }
-    }
+    }*/
 
     protected void onResume() {
         super.onResume();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAffinity();
+//        finishAffinity();
     }
 
     @Override
