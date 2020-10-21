@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                     /*
                     *
-                    * add delete action
-                    *
+                    * add delete action please  make it your self
+                    * because i didn't understand firebase stuff
                      */
                 }
             } ;
