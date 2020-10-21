@@ -15,37 +15,13 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     List<Item> items = new ArrayList<>();
     List<String> shops = new ArrayList<>();
 
-
-    private class itemsViewHolder extends RecyclerView.ViewHolder {
-
-        TextView item_name, details, quantity, status;
-
-        public itemsViewHolder(@NonNull View view) {
-            super(view);
-            item_name = view.findViewById(R.id.item_name_text_view);
-            details = view.findViewById(R.id.details_text_view);
-            quantity = view.findViewById(R.id.quantity_text_view);
-            status = view.findViewById(R.id.status_text_view);
-        }
-    }
-    private class shopsViewHolder extends RecyclerView.ViewHolder {
-
-        TextView shop;
-
-        public shopsViewHolder(@NonNull View view) {
-            super(view);
-            shop = view.findViewById(R.id.shop_text_view);
-
-        }
-    }
-
-
     public void AddItemsToAdapter(List<Item> list) {
         items.addAll(list);
         notifyDataSetChanged();
 
         organizeList();
     }
+
     public void organizeList() {
         //get shops
         for (int i = 0; i < items.size(); i++) {
@@ -73,7 +49,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         items = temp;
 
     }
-
 
     @NonNull
     @Override
@@ -122,6 +97,30 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemViewType(int position) {
 
         return items.get(position).getQuantity().equals("0") ? 1 : 0;
+    }
+
+    private class itemsViewHolder extends RecyclerView.ViewHolder {
+
+        TextView item_name, details, quantity, status;
+
+        public itemsViewHolder(@NonNull View view) {
+            super(view);
+            item_name = view.findViewById(R.id.item_name_text_view);
+            details = view.findViewById(R.id.details_text_view);
+            quantity = view.findViewById(R.id.quantity_text_view);
+            status = view.findViewById(R.id.status_text_view);
+        }
+    }
+
+    private class shopsViewHolder extends RecyclerView.ViewHolder {
+
+        TextView shop;
+
+        public shopsViewHolder(@NonNull View view) {
+            super(view);
+            shop = view.findViewById(R.id.shop_text_view);
+
+        }
     }
 
 }

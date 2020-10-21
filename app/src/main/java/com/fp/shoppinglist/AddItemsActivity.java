@@ -13,6 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class AddItemsActivity extends AppCompatActivity {
@@ -21,7 +29,7 @@ public class AddItemsActivity extends AppCompatActivity {
     String itemNameNew, shopNameNew, quantityNew, detailsNew;
     NewItemsAdapter adapter;
     RecyclerView recyclerView;
-
+    long size = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,7 @@ public class AddItemsActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(mainKey + "ListSize", list.size());
+        /*intent.putExtra(mainKey + "ListSize", list.size());
 
         for (int i = 0; i < list.size(); i++) {
             Item temp = list.get(i);
@@ -52,9 +60,31 @@ public class AddItemsActivity extends AppCompatActivity {
             intent.putExtra(mainKey + "ShopName" + i, temp.getShopName());
             intent.putExtra(mainKey + "Quantity" + i, temp.getQuantity());
             intent.putExtra(mainKey + "Details" + i, temp.getDetails());
-        }
+        }*/
 
-        startActivity(intent);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (size == 0) {
+                    ArrayList<Item> items = new ArrayList<>();
+                    size = snapshot.getChildrenCount() + list.size();
+                    for (DataSnapshot ds : snapshot.getChildren())
+                        items.add(ds.getValue(Item.class));
+                    items.addAll(list);
+                    myRef.setValue(items, (error, ref) -> {
+                        finish();
+                        startActivity(intent);
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void addToNew(View view) {
