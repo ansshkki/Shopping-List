@@ -48,11 +48,10 @@ public class AddItemsActivity extends AppCompatActivity {
 
     }
 
-    public void saveList(List<Item> list, String mainKey) {
+    public void saveList(List<Item> list) {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -127,7 +126,7 @@ public class AddItemsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.Done) {
             List<Item> list = adapter.getNewItems();
-            saveList(list, "newItems");
+            saveList(list);
             return true;
         }
         return false;
