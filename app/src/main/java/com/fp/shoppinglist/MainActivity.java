@@ -46,28 +46,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    /*private void readList(String mainKey, List<Item> tempList) {
-
-        tempList.clear();
-
-        for (int i = 0, size = getIntent().getIntExtra(mainKey + "ListSize", 0); i < size; i++) {
-
-            Item temp = new Item(getIntent().getStringExtra(mainKey + "Name" + i),
-                    getIntent().getStringExtra(mainKey + "ShopName" + i),
-                    getIntent().getStringExtra(mainKey + "Quantity" + i),
-                    "not taken",
-                    getIntent().getStringExtra(mainKey + "Details" + i));
-
-            tempList.add(temp);
-        }
-    }*/
 
     protected void onResume() {
         super.onResume();
-        /*adapter.organizeList();
-        readList("newItems", newItems);
-        adapter.AddItemsToAdapter(newItems);
-*/
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(FirebaseAuth.getInstance().getUid());
         reference.addValueEventListener(new ValueEventListener() {
@@ -86,11 +68,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-//        finishAffinity();
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

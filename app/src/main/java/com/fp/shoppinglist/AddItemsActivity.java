@@ -52,15 +52,8 @@ public class AddItemsActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        /*intent.putExtra(mainKey + "ListSize", list.size());
 
-        for (int i = 0; i < list.size(); i++) {
-            Item temp = list.get(i);
-            intent.putExtra(mainKey + "Name" + i, temp.getName());
-            intent.putExtra(mainKey + "ShopName" + i, temp.getShopName());
-            intent.putExtra(mainKey + "Quantity" + i, temp.getQuantity());
-            intent.putExtra(mainKey + "Details" + i, temp.getDetails());
-        }*/
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
