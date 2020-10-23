@@ -9,6 +9,10 @@ public class Item {
     private String details;
 
 
+    public Item(){
+
+    }
+
 
     public Item(String name, String shopName, String quantity, String status, String details) {
         this.name = name;

@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_menu, menu);
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallBack =
-            new ItemTouchHelper.SimpleCallback(0 ,ItemTouchHelper.LEFT) {
+            new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 @Override
                 public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                     return false;
@@ -98,11 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    /*
-                    *
-                    * add delete action please  make it your self
-                    * because i didn't understand firebase stuff
-                     */
+                    adapter.removeItemFromAdapter(viewHolder.getAdapterPosition());
+
                 }
-            } ;
+            };
 }

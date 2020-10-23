@@ -22,6 +22,13 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         organizeList();
     }
 
+    public void removeItemFromAdapter(int i) {
+        items.remove(i);
+        notifyDataSetChanged();
+
+        organizeList();
+    }
+
     public void organizeList() {
         //get shops
         for (int i = 0; i < items.size(); i++) {
