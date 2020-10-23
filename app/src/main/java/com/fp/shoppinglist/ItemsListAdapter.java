@@ -150,6 +150,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 viewHolder0.status.setOnClickListener(view -> {
 
                     String name = view.getContext().getSharedPreferences("MyData",MODE_PRIVATE).getString("personName" , "GUEST");
+
                     viewHolder0.status.setText("By "+ name);
                     items.get(position).setShopName("By " + name);
 
