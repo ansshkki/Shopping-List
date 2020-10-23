@@ -1,5 +1,6 @@
 package com.fp.shoppinglist;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -38,7 +41,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         organizeList();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public void removeItemFromAdapter(int position) {
 
         recentlyDeletedItem = items.get(position);
@@ -63,12 +66,14 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     }
 
+
     private void showUndoSnackbar() {
         View view = activity.findViewById(R.id.coordinator_layout);
         Snackbar snackbar = Snackbar.make(view, "Item removed", Snackbar.LENGTH_LONG);
         snackbar.setAction("Undo", v -> undoDelete());
         snackbar.show();
     }
+
 
     private void undoDelete() {
         if(!shops.contains(recentlyDeletedItem.getShopName()))
@@ -141,6 +146,19 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 viewHolder0.details.setText(current.getDetails());
                 viewHolder0.quantity.setText(current.getQuantity());
                 viewHolder0.status.setText(current.getStatus());
+
+                viewHolder0.status.setOnClickListener(view -> {
+
+                    String name = view.getContext().getSharedPreferences("MyData",MODE_PRIVATE).getString("personName" , "GUEST");
+                    viewHolder0.status.setText("By "+ name);
+                    items.get(position).setShopName("By " + name);
+
+                    notifyDataSetChanged();
+
+                    // some thing not working here !
+                    // i ' ll make it later
+
+                });
                 break;
 
             case 1:

@@ -83,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     progressDialog.dismiss();
                                     if (task1.isSuccessful()) {
                                         finish();
-                                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(SignUpActivity.this, IdentityActivity.class);
                                         startActivity(intent);
                                     }
                                 });

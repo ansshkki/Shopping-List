@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
             if (task.isSuccessful()) {
                 finish();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, IdentityActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
