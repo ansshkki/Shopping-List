@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ItemsListAdapter adapter;
     List<Item> newItems = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

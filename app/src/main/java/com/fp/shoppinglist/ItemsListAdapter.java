@@ -37,14 +37,18 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public void removeItemFromAdapter(int position) {
+
         recentlyDeletedItem = items.get(position);
         recentlyDeletedItemPosition = position;
         items.remove(position);
         notifyItemRemoved(position);
         showUndoSnackbar();
 
+        organizeList();
+
         ArrayList<Item> temp = new ArrayList<>(items);
         temp.removeIf(item -> item.getQuantity().equals("0"));
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
         myRef.setValue(temp, (error, ref) -> {
@@ -54,7 +58,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             }
         });
 
-        organizeList();
     }
 
     private void showUndoSnackbar() {
@@ -70,6 +73,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         ArrayList<Item> temp = new ArrayList<>(items);
         temp.removeIf(item -> item.getQuantity().equals("0"));
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
         myRef.setValue(temp);
@@ -77,6 +81,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void organizeList() {
         //get shops
+        shops.clear();
         for (int i = 0; i < items.size(); i++) {
             if (!shops.contains(items.get(i).getShopName()))
                 shops.add(items.get(i).getShopName());
