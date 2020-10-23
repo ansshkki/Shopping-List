@@ -6,12 +6,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    static class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+    class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
         private final ItemsListAdapter adapter;
         private final Drawable icon;
@@ -109,10 +113,17 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             adapter.removeItemFromAdapter(viewHolder.getAdapterPosition());
+            Vibrator v = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                v.vibrate(50);
+            }
         }
 
         // Prevent swiping for ShopsViewHolder.
