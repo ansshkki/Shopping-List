@@ -42,8 +42,8 @@ public class Item {
         return quantity;
     }
 
-    public void setShopName(String shopName){
-        this.shopName = shopName ;
+    public void setStatus(String status){
+        this.status = status ;
     }
 
 }

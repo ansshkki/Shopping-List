@@ -152,14 +152,18 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     String name = view.getContext().getSharedPreferences("MyData",MODE_PRIVATE).getString("personName" , "GUEST");
 
                     viewHolder0.status.setText("By "+ name);
-                    items.get(position).setShopName("By " + name);
+                    current.setStatus("By " + name);
 
                     notifyDataSetChanged();
 
-                    // some thing not working here !
-                    // i ' ll make it later
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
+                    myRef.setValue(items);
+
 
                 });
+
+
                 break;
 
             case 1:
