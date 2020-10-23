@@ -82,6 +82,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void organizeList() {
         //get shops
         shops.clear();
+
         for (int i = 0; i < items.size(); i++) {
             if (!shops.contains(items.get(i).getShopName()))
                 shops.add(items.get(i).getShopName());
