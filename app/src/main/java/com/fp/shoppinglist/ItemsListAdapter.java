@@ -68,6 +68,8 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     private void undoDelete() {
+        if(!shops.contains(recentlyDeletedItem.getShopName()))
+            items.add(new Item("",recentlyDeletedItem.getShopName(), "0", "", ""));
         items.add(recentlyDeletedItemPosition, recentlyDeletedItem);
         notifyItemInserted(recentlyDeletedItemPosition);
 
