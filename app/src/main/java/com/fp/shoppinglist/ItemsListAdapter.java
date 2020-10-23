@@ -45,7 +45,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         ArrayList<Item> temp = new ArrayList<>(items);
         temp.removeIf(item -> item.getQuantity().equals("0"));
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
         myRef.setValue(temp, (error, ref) -> {
@@ -71,7 +70,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         ArrayList<Item> temp = new ArrayList<>(items);
         temp.removeIf(item -> item.getQuantity().equals("0"));
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
         myRef.setValue(temp);
