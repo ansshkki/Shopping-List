@@ -1,11 +1,13 @@
 package com.fp.shoppinglist;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -36,6 +38,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         organizeList();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void removeItemFromAdapter(int position) {
 
         recentlyDeletedItem = items.get(position);
