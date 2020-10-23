@@ -1,12 +1,19 @@
 package com.fp.shoppinglist;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallBack = new SwipeToDeleteCallback(this, adapter);
         new ItemTouchHelper(itemTouchHelperCallBack).attachToRecyclerView(recyclerView);
 
         adapter.organizeList();
@@ -44,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         setSupportActionBar(toolbar);
-    }
-
-
-    protected void onResume() {
-        super.onResume();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(FirebaseAuth.getInstance().getUid());
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 newItems.clear();
                 for (DataSnapshot ds : snapshot.getChildren())
                     newItems.add(ds.getValue(Item.class));
-                adapter.AddItemsToAdapter(newItems);
+                adapter.AddItemsToAdapter(MainActivity.this, newItems);
             }
 
             @Override
@@ -67,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,17 +90,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallBack =
-            new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-                @Override
-                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                    return false;
-                }
+    static class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 
-                @Override
-                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                    adapter.removeItemFromAdapter(viewHolder.getAdapterPosition());
+        private final ItemsListAdapter adapter;
+        private final Drawable icon;
+        private final ColorDrawable background;
 
-                }
-            };
+        public SwipeToDeleteCallback(Context context, ItemsListAdapter adapter) {
+            super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+            this.adapter = adapter;
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_delete);
+            background = new ColorDrawable(Color.RED);
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            adapter.removeItemFromAdapter(viewHolder.getAdapterPosition());
+
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+            View itemView = viewHolder.itemView;
+
+            int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+            int iconTop = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
+            int iconBottom = iconTop + icon.getIntrinsicHeight();
+
+            if (dX < 0) { // Swiping to the left
+                int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
+                int iconRight = itemView.getRight() - iconMargin;
+                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+
+                background.setBounds(itemView.getRight() + ((int) dX), itemView.getTop(), itemView.getRight(), itemView.getBottom());
+            } else if (dX == 0) { // view is unSwiped
+                background.setBounds(0, 0, 0, 0);
+            }
+
+            background.draw(c);
+            icon.draw(c);
+        }
+    }
 }

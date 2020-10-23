@@ -8,25 +8,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    MainActivity activity;
     List<Item> items = new ArrayList<>();
     List<String> shops = new ArrayList<>();
+    Item recentlyDeletedItem;
+    int recentlyDeletedItemPosition;
 
-    public void AddItemsToAdapter(List<Item> list) {
+    public void AddItemsToAdapter(MainActivity activity, List<Item> list) {
+        this.activity = activity;
         items.addAll(list);
         notifyDataSetChanged();
 
         organizeList();
     }
 
-    public void removeItemFromAdapter(int i) {
-        items.remove(i);
-        notifyDataSetChanged();
+    public void removeItemFromAdapter(int position) {
+        recentlyDeletedItem = items.get(position);
+        recentlyDeletedItemPosition = position;
+        items.remove(position);
+        notifyItemRemoved(position);
+        showUndoSnackbar();
 
         organizeList();
+    }
+
+    private void showUndoSnackbar() {
+        View view = activity.findViewById(R.id.coordinator_layout);
+        Snackbar snackbar = Snackbar.make(view, "Item removed", Snackbar.LENGTH_LONG);
+        snackbar.setAction("Undo", v -> undoDelete());
+        snackbar.show();
+    }
+
+    private void undoDelete() {
+        items.add(recentlyDeletedItemPosition, recentlyDeletedItem);
+        notifyItemInserted(recentlyDeletedItemPosition);
     }
 
     public void organizeList() {
@@ -106,7 +128,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return items.get(position).getQuantity().equals("0") ? 1 : 0;
     }
 
-    private class itemsViewHolder extends RecyclerView.ViewHolder {
+    private static class itemsViewHolder extends RecyclerView.ViewHolder {
 
         TextView item_name, details, quantity, status;
 
@@ -119,7 +141,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private class shopsViewHolder extends RecyclerView.ViewHolder {
+    private static class shopsViewHolder extends RecyclerView.ViewHolder {
 
         TextView shop;
 

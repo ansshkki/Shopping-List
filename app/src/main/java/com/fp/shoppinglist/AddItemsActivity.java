@@ -29,7 +29,6 @@ public class AddItemsActivity extends AppCompatActivity {
     String itemNameNew, shopNameNew, quantityNew, detailsNew;
     NewItemsAdapter adapter;
     RecyclerView recyclerView;
-    long size = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +55,17 @@ public class AddItemsActivity extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (size == 0) {
-                    ArrayList<Item> items = new ArrayList<>();
-                    size = snapshot.getChildrenCount() + list.size();
-                    for (DataSnapshot ds : snapshot.getChildren())
-                        items.add(ds.getValue(Item.class));
-                    items.addAll(list);
-                    myRef.setValue(items, (error, ref) -> {
-                        finish();
-                        startActivity(intent);
-                    });
-                }
+                ArrayList<Item> items = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren())
+                    items.add(ds.getValue(Item.class));
+                items.addAll(list);
+                myRef.setValue(items, (error, ref) -> {
+                    finish();
+                    startActivity(intent);
+                });
             }
 
             @Override
