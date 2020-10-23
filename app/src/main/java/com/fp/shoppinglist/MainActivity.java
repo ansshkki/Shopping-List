@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapter = new ItemsListAdapter();
+        adapter = new ItemsListAdapter(this);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 newItems.clear();
                 for (DataSnapshot ds : snapshot.getChildren())
                     newItems.add(ds.getValue(Item.class));
-                adapter.AddItemsToAdapter(MainActivity.this, newItems);
+                adapter.addItemsToAdapter(newItems);
             }
 
             @Override
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         private final ColorDrawable background;
 
         public SwipeToDeleteCallback(Context context, ItemsListAdapter adapter) {
-            super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+            super(0, ItemTouchHelper.LEFT);
             this.adapter = adapter;
             icon = ContextCompat.getDrawable(context, R.drawable.ic_delete);
             background = new ColorDrawable(Color.RED);
@@ -114,6 +114,14 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        // Prevent swiping for ShopsViewHolder.
+        @Override
+        public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+            if (viewHolder instanceof ItemsListAdapter.ShopsViewHolder) return 0;
+            return super.getSwipeDirs(recyclerView, viewHolder);
+        }
+
+        // Draw red background with delete icon .
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);

@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +24,12 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     Item recentlyDeletedItem;
     int recentlyDeletedItemPosition;
 
-    public void AddItemsToAdapter(MainActivity activity, List<Item> list) {
+    public ItemsListAdapter(MainActivity activity) {
         this.activity = activity;
+    }
+
+    public void addItemsToAdapter(List<Item> list) {
+        items.clear();
         items.addAll(list);
         notifyDataSetChanged();
 
@@ -35,6 +42,18 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         items.remove(position);
         notifyItemRemoved(position);
         showUndoSnackbar();
+
+        ArrayList<Item> temp = new ArrayList<>(items);
+        temp.removeIf(item -> item.getQuantity().equals("0"));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
+        myRef.setValue(temp, (error, ref) -> {
+            if (error != null) {
+                undoDelete();
+                Snackbar.make(activity.findViewById(R.id.coordinator_layout), error.getMessage(), Snackbar.LENGTH_LONG).show();
+            }
+        });
 
         organizeList();
     }
@@ -49,6 +68,13 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private void undoDelete() {
         items.add(recentlyDeletedItemPosition, recentlyDeletedItem);
         notifyItemInserted(recentlyDeletedItemPosition);
+
+        ArrayList<Item> temp = new ArrayList<>(items);
+        temp.removeIf(item -> item.getQuantity().equals("0"));
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
+        myRef.setValue(temp);
     }
 
     public void organizeList() {
@@ -87,10 +113,10 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             case 0:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row, parent, false);
-                return new itemsViewHolder(view);
+                return new ItemsViewHolder(view);
             case 1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_row, parent, false);
-                return new shopsViewHolder(view);
+                return new ShopsViewHolder(view);
 
         }
         return null;
@@ -101,7 +127,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         Item current = items.get(position);
         switch (holder.getItemViewType()) {
             case 0:
-                itemsViewHolder viewHolder0 = (itemsViewHolder) holder;
+                ItemsViewHolder viewHolder0 = (ItemsViewHolder) holder;
                 viewHolder0.item_name.setText(current.getName());
                 viewHolder0.details.setText(current.getDetails());
                 viewHolder0.quantity.setText(current.getQuantity());
@@ -109,7 +135,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 break;
 
             case 1:
-                shopsViewHolder viewHolder1 = (shopsViewHolder) holder;
+                ShopsViewHolder viewHolder1 = (ShopsViewHolder) holder;
                 viewHolder1.shop.setText(current.getShopName());
 
                 break;
@@ -128,11 +154,11 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return items.get(position).getQuantity().equals("0") ? 1 : 0;
     }
 
-    private static class itemsViewHolder extends RecyclerView.ViewHolder {
+    public static class ItemsViewHolder extends RecyclerView.ViewHolder {
 
         TextView item_name, details, quantity, status;
 
-        public itemsViewHolder(@NonNull View view) {
+        public ItemsViewHolder(@NonNull View view) {
             super(view);
             item_name = view.findViewById(R.id.item_name_text_view);
             details = view.findViewById(R.id.details_text_view);
@@ -141,11 +167,11 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private static class shopsViewHolder extends RecyclerView.ViewHolder {
+    public static class ShopsViewHolder extends RecyclerView.ViewHolder {
 
         TextView shop;
 
-        public shopsViewHolder(@NonNull View view) {
+        public ShopsViewHolder(@NonNull View view) {
             super(view);
             shop = view.findViewById(R.id.shop_text_view);
 
