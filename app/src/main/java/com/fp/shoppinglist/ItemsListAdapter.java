@@ -53,7 +53,9 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         organizeList();
 
         ArrayList<Item> temp = new ArrayList<>(items);
-        temp.removeIf(item -> item.getQuantity().equals("0"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            temp.removeIf(item -> item.getQuantity().equals("0"));
+        }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
@@ -82,7 +84,9 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyItemInserted(recentlyDeletedItemPosition);
 
         ArrayList<Item> temp = new ArrayList<>(items);
-        temp.removeIf(item -> item.getQuantity().equals("0"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            temp.removeIf(item -> item.getQuantity().equals("0"));
+        }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
