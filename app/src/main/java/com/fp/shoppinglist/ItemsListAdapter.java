@@ -70,7 +70,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     private void showUndoSnackbar() {
-
         View view = activity.findViewById(R.id.coordinator_layout);
         Snackbar snackbar = Snackbar.make(view, "Item removed", Snackbar.LENGTH_LONG);
         snackbar.setAction("Undo", v -> undoDelete());
@@ -156,8 +155,13 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                     String name = view.getContext().getSharedPreferences("MyData",MODE_PRIVATE).getString("personName" , "GUEST");
 
-                    viewHolder0.status.setText("By "+ name);
-                    current.setStatus("By " + name);
+                    if(!viewHolder0.status.getText().toString().equals("not taken")){
+                        viewHolder0.status.setText("not taken");
+                        current.setStatus("not taken");
+                    }else {
+                        viewHolder0.status.setText("By " + name);
+                        current.setStatus("By " + name);
+                    }
 
                     notifyDataSetChanged();
 
