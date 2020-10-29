@@ -70,6 +70,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
 
     private void showUndoSnackbar() {
+
         View view = activity.findViewById(R.id.coordinator_layout);
         Snackbar snackbar = Snackbar.make(view, "Item removed", Snackbar.LENGTH_LONG);
         snackbar.setAction("Undo", v -> undoDelete());
