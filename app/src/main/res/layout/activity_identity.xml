@@ -44,9 +44,9 @@
 
 
     <LinearLayout
-        android:layout_marginTop="32dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="32dp"
         android:orientation="vertical">
 
         <TextView
@@ -69,15 +69,15 @@
 
 
                 <ImageView
-                    android:layout_marginRight="4dp"
                     android:layout_width="500px"
-                    android:layout_height="500px" />
+                    android:layout_height="500px"
+                    android:layout_marginRight="4dp" />
 
 
                 <ImageView
-                    android:layout_marginLeft="4dp"
                     android:layout_width="500px"
-                    android:layout_height="500px" />
+                    android:layout_height="500px"
+                    android:layout_marginLeft="4dp" />
 
 
             </LinearLayout>
@@ -90,15 +90,15 @@
 
 
                 <ImageView
-                    android:layout_marginRight="4dp"
                     android:layout_width="500px"
-                    android:layout_height="500px" />
+                    android:layout_height="500px"
+                    android:layout_marginRight="4dp" />
 
 
                 <ImageView
-                    android:layout_marginLeft="4dp"
                     android:layout_width="500px"
-                    android:layout_height="500px" />
+                    android:layout_height="500px"
+                    android:layout_marginLeft="4dp" />
 
 
             </LinearLayout>
