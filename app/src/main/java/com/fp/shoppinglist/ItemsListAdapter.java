@@ -1,12 +1,15 @@
 
 package com.fp.shoppinglist;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -17,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +33,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     List<String> shops = new ArrayList<>();
     Item recentlyDeletedItem;
     int recentlyDeletedItemPosition;
+
 
     public ItemsListAdapter(MainActivity activity) {
         this.activity = activity;
@@ -80,7 +85,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void undoDelete() {
         if(!shops.contains(recentlyDeletedItem.getShopName()))
-            items.add(new Item("",recentlyDeletedItem.getShopName(), "0", "", ""));
+            items.add(new Item("",recentlyDeletedItem.getShopName(), "0", "not taken", "blank30",""));
         items.add(recentlyDeletedItemPosition, recentlyDeletedItem);
         notifyItemInserted(recentlyDeletedItemPosition);
 
@@ -104,7 +109,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         for (int i = 0; i < shops.size(); i++) {
-            items.add(new Item("", shops.get(i), "0", "", ""));
+            items.add(new Item("", shops.get(i), "0", "not taken","blank30", ""));
         }
 
         //list'sequence correction
@@ -112,7 +117,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         for (int j = 0; j < shops.size(); j++) {
             String shopName = shops.get(j);
-            temp.add(new Item("", shops.get(j), "0", "", ""));
+            temp.add(new Item("", shops.get(j), "0", "not taken","blank30", ""));
 
             for (int i = 0; i < items.size(); i++) {
                 if (items.get(i).getShopName().equals(shopName) && !items.get(i).getQuantity().equals("0"))
@@ -147,22 +152,45 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         switch (holder.getItemViewType()) {
             case 0:
                 ItemsViewHolder viewHolder0 = (ItemsViewHolder) holder;
+                Context context = viewHolder0.status.getContext();
+
+
+                String name = context.getSharedPreferences("MyData",MODE_PRIVATE).getString("personName" , "GUEST");
+                String personPhotoName = context.getSharedPreferences("MyData",MODE_PRIVATE).getString("personPhotoName" , "blank30");
+
+
                 viewHolder0.item_name.setText(current.getName());
                 viewHolder0.details.setText(current.getDetails());
                 viewHolder0.quantity.setText(current.getQuantity());
-                viewHolder0.status.setText(current.getStatus());
+
+
+                viewHolder0.status.setBackground(context.getResources().getDrawable( context.getResources().getIdentifier(current.getStatusPhoto(), "drawable", context.getPackageName())));
+
 
                 viewHolder0.status.setOnClickListener(view -> {
 
-                    String name = view.getContext().getSharedPreferences("MyData",MODE_PRIVATE).getString("personName" , "GUEST");
 
-                    if(!viewHolder0.status.getText().toString().equals("not taken")){
-                        viewHolder0.status.setText("not taken");
-                        current.setStatus("not taken");
+                    if(! current.getStatusPhoto().equals("blank30")){
+
+
+                        if(current.getStatus().equals(name)){
+                            viewHolder0.status.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("blank30", "drawable", context.getPackageName())));
+                            current.setStatusPhoto("blank30");
+                            current.setStatus("not taken");
+
+                        }else{
+
+                            Toast.makeText(context.getApplicationContext(),"taken by " + current.getStatus(),Toast.LENGTH_SHORT).show();
+                        }
+
+
+
                     }else {
-                        viewHolder0.status.setText("By " + name);
-                        current.setStatus("By " + name);
+                        viewHolder0.status.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier(personPhotoName, "drawable", context.getPackageName())));
+                        current.setStatus(name);
+                        current.setStatusPhoto(personPhotoName);
                     }
+
 
                     notifyDataSetChanged();
 
@@ -198,14 +226,15 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public static class ItemsViewHolder extends RecyclerView.ViewHolder {
 
-        TextView item_name, details, quantity, status;
+        TextView item_name, details, quantity ;
+        ImageView status ;
 
         public ItemsViewHolder(@NonNull View view) {
             super(view);
             item_name = view.findViewById(R.id.item_name_text_view);
             details = view.findViewById(R.id.details_text_view);
             quantity = view.findViewById(R.id.quantity_text_view);
-            status = view.findViewById(R.id.status_text_view);
+            status = view.findViewById(R.id.status_image_view);
         }
     }
 

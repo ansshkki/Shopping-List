@@ -7,6 +7,7 @@ public class Item {
     private String quantity;
     private String status;
     private String details;
+    private String statusPhoto ;
 
 
     public Item(){
@@ -14,12 +15,13 @@ public class Item {
     }
 
 
-    public Item(String name, String shopName, String quantity, String status, String details) {
+    public Item(String name, String shopName, String quantity, String status,String statusPhoto, String details) {
         this.name = name;
         this.status = status;
         this.shopName = shopName;
         this.details = details;
         this.quantity = quantity;
+        this.statusPhoto = statusPhoto ;
     }
 
     public String getName() {
@@ -42,8 +44,15 @@ public class Item {
         return quantity;
     }
 
+    public String getStatusPhoto(){return statusPhoto;}
+
     public void setStatus(String status){
         this.status = status ;
     }
+
+    public void setStatusPhoto(String statusPhoto){
+        this.statusPhoto = statusPhoto ;
+    }
+
 
 }

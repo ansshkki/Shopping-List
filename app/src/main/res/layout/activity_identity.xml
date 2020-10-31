@@ -8,12 +8,13 @@
     tools:context=".IdentityActivity">
 
     <LinearLayout
-        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="vertical">
 
         <LinearLayout
+            android:layout_marginLeft="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -27,6 +28,7 @@
                 android:textSize="24dp" />
 
             <EditText
+                android:id="@+id/personName_ET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -34,19 +36,18 @@
         </LinearLayout>
 
 
-
-
-
     </LinearLayout>
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="32dp"
         android:orientation="vertical">
 
         <TextView
+            android:layout_marginLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Choose a photo :"
@@ -55,27 +56,37 @@
 
 
         <LinearLayout
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:orientation="vertical">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="4dp">
 
 
                 <ImageView
-                    android:layout_width="500px"
-                    android:layout_height="500px"
-                    android:layout_marginRight="4dp" />
+                    android:id="@+id/mother"
+                    android:layout_width="350px"
+                    android:layout_height="350px"
+                    android:layout_marginRight="4dp"
+                    android:onClick="imageClicked"
+                    android:background="@drawable/mother"/>
 
 
                 <ImageView
-                    android:layout_width="500px"
-                    android:layout_height="500px"
-                    android:layout_marginLeft="4dp" />
+                    android:background="@drawable/father"
+                    android:id="@+id/father"
+                    android:layout_width="350px"
+                    android:layout_height="350px"
+                    android:layout_marginLeft="4dp"
+                    android:onClick="imageClicked" />
 
 
             </LinearLayout>
@@ -84,19 +95,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp">
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp">
 
 
                 <ImageView
-                    android:layout_width="500px"
-                    android:layout_height="500px"
-                    android:layout_marginRight="4dp" />
+                    android:background="@drawable/daughter"
+                    android:id="@+id/daughter"
+                    android:layout_width="350px"
+                    android:layout_height="350px"
+                    android:layout_marginRight="4dp"
+                    android:onClick="imageClicked" />
 
 
                 <ImageView
-                    android:layout_width="500px"
-                    android:layout_height="500px"
-                    android:layout_marginLeft="4dp" />
+                    android:background="@drawable/son"
+                    android:id="@+id/son"
+                    android:layout_width="350px"
+                    android:layout_height="350px"
+                    android:layout_marginLeft="4dp"
+                    android:onClick="imageClicked" />
 
 
             </LinearLayout>
@@ -108,12 +128,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="goToMain"
             android:text="Done" />
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

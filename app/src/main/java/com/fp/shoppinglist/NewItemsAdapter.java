@@ -36,7 +36,7 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.newIte
             details = "no details";
         }
 
-        Item item = new Item(name, shopName, quantity, "not taken", details);
+        Item item = new Item(name, shopName, quantity, "not taken","blank30", details);
         newItems.add(item);
 
         notifyDataSetChanged();
