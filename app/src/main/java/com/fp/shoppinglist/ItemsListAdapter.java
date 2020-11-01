@@ -89,7 +89,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         items.add(recentlyDeletedItemPosition, recentlyDeletedItem);
         notifyItemInserted(recentlyDeletedItemPosition);
 
-
         ArrayList<Item> temp = new ArrayList<>(items);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             temp.removeIf(item -> item.getQuantity().equals("0"));
