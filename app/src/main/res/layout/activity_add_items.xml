@@ -3,139 +3,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
     android:orientation="vertical"
-    tools:context=".AddItemsActivity"
-    android:layoutDirection="ltr">
-
+    tools:context=".AddItemsActivity">
 
 
     <LinearLayout
-    android:layout_marginTop="16dp"
-    android:layout_marginLeft="32dp"
-    android:layout_marginRight="32dp"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layoutDirection="ltr">
-
-
-
-<LinearLayout
-    android:weightSum="10"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <TextView
-        android:layout_width="3dp"
-        android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:gravity="bottom"
-        android:layout_weight="3.5"
-        android:text="Item name"
-        android:textColor="#000000" />
-
-    <EditText
-        android:id="@+id/itemNameNew_ET"
-        android:layout_weight="6.5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="32dp"
+        android:layoutDirection="ltr"
+        android:orientation="vertical">
 
 
         <LinearLayout
-            android:weightSum="10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <TextView
-                android:textColor="#000000"
-                android:layout_margin="4dp"
-                android:gravity="bottom"
-                android:layout_width="0dp"
-                android:layout_weight="3.5"
+                android:layout_width="3dp"
                 android:layout_height="match_parent"
-                android:text="Shop name"/>
+                android:layout_margin="4dp"
+                android:layout_weight="3.5"
+                android:gravity="bottom"
+                android:text="Item name"
+                android:textColor="#000000" />
+
+            <EditText
+                android:id="@+id/itemNameNew_ET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6.5" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="3.5"
+                android:gravity="bottom"
+                android:text="Shop name"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/shopNameNew_ET"
-                android:layout_weight="6.5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="6.5" />
 
         </LinearLayout>
+
         <LinearLayout
-            android:weightSum="10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <TextView
-                android:textColor="#000000"
-                android:layout_margin="4dp"
-                android:gravity="bottom"
                 android:layout_width="0dp"
-                android:layout_weight="3.5"
                 android:layout_height="match_parent"
-                android:text="Quantity"/>
+                android:layout_margin="4dp"
+                android:layout_weight="3.5"
+                android:gravity="bottom"
+                android:text="Quantity"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/quantityNew_ET"
-                android:layout_weight="6.5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="6.5" />
 
         </LinearLayout>
+
         <LinearLayout
-            android:weightSum="10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="10">
 
             <TextView
-                android:textColor="#000000"
-
-                android:layout_margin="4dp"
-                android:gravity="bottom"
                 android:layout_width="0dp"
-                android:layout_weight="3.5"                android:layout_height="match_parent"
-                android:text="Details"/>
+
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="3.5"
+                android:gravity="bottom"
+                android:text="Details"
+                android:textColor="#000000" />
 
             <EditText
                 android:id="@+id/detailsNew_ET"
-                android:layout_weight="6.5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="6.5" />
 
         </LinearLayout>
 
 
-
         <Button
-            android:onClick="addToNew"
-            android:layout_marginTop="8dp"
-            android:textColor="#FFFFFF"
-            android:text="+"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-</LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:onClick="addToNew"
+            android:text="+"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
 
     <LinearLayout
@@ -144,10 +130,9 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/new_items_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/new_items_recycler_view"/>
-
+            android:layout_height="match_parent" />
 
 
     </LinearLayout>

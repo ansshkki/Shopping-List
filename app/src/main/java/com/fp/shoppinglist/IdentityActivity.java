@@ -1,7 +1,5 @@
 package com.fp.shoppinglist;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,12 +7,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.common.annotation.KeepForSdkWithFieldsAndMethods;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class IdentityActivity extends AppCompatActivity {
 
     EditText nameEditText;
-    String personPhotoName;
+    int personPhotoName = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,43 +26,33 @@ public class IdentityActivity extends AppCompatActivity {
     public void goToMain(View view) {
 
         if (nameEditText.getText().toString().isEmpty()) {
-
             nameEditText.setError("Name is required");
-
+        } else if (personPhotoName == 0) {
+            Toast.makeText(this, "Image is required", Toast.LENGTH_SHORT).show();
         } else {
-
             SharedPreferences sp = getSharedPreferences("MyData", MODE_PRIVATE);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("personName", nameEditText.getText().toString());
-            editor.putString("personPhotoName", personPhotoName);
+            editor.putInt("personPhotoName", personPhotoName);
 
-            editor.commit();
+            editor.apply();
 
             Intent intent = new Intent(this, MainActivity.class);
             finish();
             startActivity(intent);
-
         }
     }
 
     public void imageClicked(View view) {
-
-        switch (view.getId()) {
-            case R.id.father:
-                personPhotoName = "father";
-                break;
-
-            case R.id.son:
-                personPhotoName = "son";
-                break;
-            case R.id.daughter:
-                personPhotoName = "daughter";
-                break;
-            case R.id.mother:
-                personPhotoName = "mother";
-                break;
+        int id = view.getId();
+        if (id == R.id.father) {
+            personPhotoName = R.drawable.father;
+        } else if (id == R.id.son) {
+            personPhotoName = R.drawable.son;
+        } else if (id == R.id.daughter) {
+            personPhotoName = R.drawable.daughter;
+        } else if (id == R.id.mother) {
+            personPhotoName = R.drawable.mother;
         }
     }
-
-
 }

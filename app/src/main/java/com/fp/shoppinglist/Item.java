@@ -7,21 +7,18 @@ public class Item {
     private String quantity;
     private String status;
     private String details;
-    private String statusPhoto ;
+    private int statusPhoto;
 
-
-    public Item(){
-
+    public Item() {
     }
 
-
-    public Item(String name, String shopName, String quantity, String status,String statusPhoto, String details) {
+    public Item(String name, String shopName, String quantity, String status, int statusPhoto, String details) {
         this.name = name;
         this.status = status;
         this.shopName = shopName;
         this.details = details;
         this.quantity = quantity;
-        this.statusPhoto = statusPhoto ;
+        this.statusPhoto = statusPhoto;
     }
 
     public String getName() {
@@ -30,6 +27,10 @@ public class Item {
 
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getShopName() {
@@ -44,15 +45,12 @@ public class Item {
         return quantity;
     }
 
-    public String getStatusPhoto(){return statusPhoto;}
-
-    public void setStatus(String status){
-        this.status = status ;
+    public int getStatusPhoto() {
+        return statusPhoto;
     }
 
-    public void setStatusPhoto(String statusPhoto){
-        this.statusPhoto = statusPhoto ;
+    public void setStatusPhoto(int statusPhoto) {
+        this.statusPhoto = statusPhoto;
     }
-
 
 }

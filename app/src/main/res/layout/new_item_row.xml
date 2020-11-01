@@ -13,10 +13,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:textColor="#000000"
             android:id="@+id/new_item_name_text_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/new_details_text_view"
@@ -38,11 +38,11 @@
         android:layout_weight="2">
 
         <ImageView
-            android:contentDescription="X"
             android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/x" />
+            android:background="@drawable/x"
+            android:contentDescription="X" />
 
     </LinearLayout>
 

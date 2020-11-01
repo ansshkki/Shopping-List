@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
->
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -14,10 +13,10 @@
         android:orientation="vertical">
 
         <TextView
-            android:textColor="#000000"
             android:id="@+id/item_name_text_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/details_text_view"
@@ -33,12 +32,18 @@
         android:layout_weight="2"
         android:gravity="center" />
 
-    <ImageView
-        android:id="@+id/status_image_view"
+    <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="125px"
+        android:layout_height="match_parent"
         android:layout_weight="2"
-        android:background="@drawable/blank30"
-        android:gravity="center" />
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/status_image_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/blank30" />
+    </FrameLayout>
 
 </LinearLayout>

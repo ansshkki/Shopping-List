@@ -16,35 +16,20 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.newIte
 
     List<Item> newItems = new ArrayList<>();
 
-    public static class newItemsViewHolder extends RecyclerView.ViewHolder {
-
-        TextView item_name, details, quantity;
-        ImageView imageView;
-
-        public newItemsViewHolder(@NonNull View view) {
-            super(view);
-            item_name = view.findViewById(R.id.new_item_name_text_view);
-            details = view.findViewById(R.id.new_details_text_view);
-            quantity = view.findViewById(R.id.new_quantity_text_view);
-            imageView = view.findViewById(R.id.delete);
-
-        }
-    }
-
     public void addItemsToAdapter(String name, String shopName, String quantity, String details) {
         if (details.equals("")) {
             details = "no details";
         }
 
-        Item item = new Item(name, shopName, quantity, "not taken","blank30", details);
+        Item item = new Item(name, shopName, quantity, "not taken", R.drawable.blank30, details);
         newItems.add(item);
 
         notifyDataSetChanged();
     }
+
     public List<Item> getNewItems() {
         return newItems;
     }
-
 
     @NonNull
     @Override
@@ -69,6 +54,21 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.newIte
     @Override
     public int getItemCount() {
         return newItems.size();
+    }
+
+    public static class newItemsViewHolder extends RecyclerView.ViewHolder {
+
+        TextView item_name, details, quantity;
+        ImageView imageView;
+
+        public newItemsViewHolder(@NonNull View view) {
+            super(view);
+            item_name = view.findViewById(R.id.new_item_name_text_view);
+            details = view.findViewById(R.id.new_details_text_view);
+            quantity = view.findViewById(R.id.new_quantity_text_view);
+            imageView = view.findViewById(R.id.delete);
+
+        }
     }
 
 
