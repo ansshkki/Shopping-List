@@ -1,137 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".IdentityActivity">
 
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Your name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/personName_ET"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Choose a photo:"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical">
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mother"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:onClick="imageClicked"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enter your name"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/personName_ET"
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/mother" />
+        </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/father"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:onClick="imageClicked"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
 
-        </LinearLayout>
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/father" />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-
 
     <LinearLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Choose a photo :"
-            android:textColor="#000000"
-            android:textSize="24sp" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/daughter"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:onClick="imageClicked"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="4dp">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/daughter" />
+        </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/son"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="16dp"
+            android:onClick="imageClicked"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
 
-                <ImageView
-                    android:id="@+id/mother"
-                    android:layout_width="350px"
-                    android:layout_height="350px"
-                    android:layout_marginEnd="4dp"
-                    android:background="@drawable/mother"
-                    android:onClick="imageClicked" />
-
-
-                <ImageView
-                    android:id="@+id/father"
-                    android:layout_width="350px"
-                    android:layout_height="350px"
-                    android:layout_marginStart="4dp"
-                    android:background="@drawable/father"
-                    android:onClick="imageClicked" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp">
-
-
-                <ImageView
-                    android:id="@+id/daughter"
-                    android:layout_width="350px"
-                    android:layout_height="350px"
-                    android:layout_marginEnd="4dp"
-                    android:background="@drawable/daughter"
-                    android:onClick="imageClicked" />
-
-
-                <ImageView
-                    android:id="@+id/son"
-                    android:layout_width="350px"
-                    android:layout_height="350px"
-                    android:layout_marginStart="4dp"
-                    android:background="@drawable/son"
-                    android:onClick="imageClicked" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="goToMain"
-            android:text="Done" />
-
+                android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/son" />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="goToMain"
+        android:text="Done" />
 
 </LinearLayout>

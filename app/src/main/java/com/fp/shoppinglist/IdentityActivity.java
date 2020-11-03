@@ -1,9 +1,12 @@
 package com.fp.shoppinglist;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,6 +16,7 @@ public class IdentityActivity extends AppCompatActivity {
 
     EditText nameEditText;
     int personPhotoName = 0;
+    View previousView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,11 +24,9 @@ public class IdentityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_identity);
 
         nameEditText = findViewById(R.id.personName_ET);
-
     }
 
     public void goToMain(View view) {
-
         if (nameEditText.getText().toString().isEmpty()) {
             nameEditText.setError("Name is required");
         } else if (personPhotoName == 0) {
@@ -44,6 +46,20 @@ public class IdentityActivity extends AppCompatActivity {
     }
 
     public void imageClicked(View view) {
+        if (previousView != null) {
+            ObjectAnimator upAnimator = ObjectAnimator.ofFloat(previousView, "translationZ", 0);
+            upAnimator.setDuration(200);
+            upAnimator.setInterpolator(new AccelerateInterpolator());
+            upAnimator.start();
+        }
+
+        ObjectAnimator downAnimator = ObjectAnimator.ofFloat(view, "translationZ", 16);
+        downAnimator.setDuration(200);
+        downAnimator.setInterpolator(new DecelerateInterpolator());
+        downAnimator.start();
+
+        previousView = view;
+
         int id = view.getId();
         if (id == R.id.father) {
             personPhotoName = R.drawable.father;

@@ -1,7 +1,7 @@
 package com.fp.shoppinglist;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +44,8 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
+    @SuppressLint("NewApi")
     public void removeItemFromAdapter(int position) {
-
         recentlyDeletedItem = items.get(position);
         recentlyDeletedItemPosition = position;
         items.remove(position);
@@ -55,9 +55,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         organizeList();
 
         ArrayList<Item> temp = new ArrayList<>(items);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            temp.removeIf(item -> item.getQuantity().equals("0"));
-        }
+        temp.removeIf(item -> item.getQuantity().equals("0"));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
@@ -67,9 +65,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Snackbar.make(activity.findViewById(R.id.coordinator_layout), error.getMessage(), Snackbar.LENGTH_LONG).show();
             }
         });
-
     }
-
 
     private void showUndoSnackbar() {
         View view = activity.findViewById(R.id.coordinator_layout);
@@ -78,7 +74,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         snackbar.show();
     }
 
-
+    @SuppressLint("NewApi")
     private void undoDelete() {
         if (!shops.contains(recentlyDeletedItem.getShopName()))
             items.add(new Item("", recentlyDeletedItem.getShopName(), "0", "not taken", R.drawable.blank30, ""));
@@ -86,9 +82,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         notifyItemInserted(recentlyDeletedItemPosition);
 
         ArrayList<Item> temp = new ArrayList<>(items);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            temp.removeIf(item -> item.getQuantity().equals("0"));
-        }
+        temp.removeIf(item -> item.getQuantity().equals("0"));
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
@@ -142,6 +136,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return null;
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Item current = items.get(position);
@@ -173,9 +168,11 @@ public class ItemsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     }
                     notifyDataSetChanged();
 
+                    ArrayList<Item> temp = new ArrayList<>(items);
+                    temp.removeIf(item -> item.getQuantity().equals("0"));
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
-                    myRef.setValue(items);
+                    myRef.setValue(temp);
                 });
                 break;
             case 1:
