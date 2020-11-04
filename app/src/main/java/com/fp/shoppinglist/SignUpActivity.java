@@ -48,9 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Please enter a valid email");
-            emailEditText.requestFocus();
-            return;
+            email += "@gmail.com";
         }
 
         if (password.isEmpty()) {

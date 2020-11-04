@@ -39,9 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Please enter a valid email");
-            editTextEmail.requestFocus();
-            return;
+            email += "@gmail.com";
         }
 
         if (password.isEmpty()) {
