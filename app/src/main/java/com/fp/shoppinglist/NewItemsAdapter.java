@@ -67,7 +67,6 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.newIte
             details = view.findViewById(R.id.new_details_text_view);
             quantity = view.findViewById(R.id.new_quantity_text_view);
             imageView = view.findViewById(R.id.delete);
-
         }
     }
 

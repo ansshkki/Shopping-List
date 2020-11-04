@@ -48,10 +48,8 @@ public class AddItemsActivity extends AppCompatActivity {
     }
 
     public void saveList(List<Item> list) {
-
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference(FirebaseAuth.getInstance().getUid());
@@ -76,9 +74,7 @@ public class AddItemsActivity extends AppCompatActivity {
     }
 
     public void addToNew(View view) {
-
         boolean correctInput = true;
-
         EditText[] editTexts = {itemNameNew_ET, shopNameNew_ET, quantityNew_ET};
 
         itemNameNew = itemNameNew_ET.getText().toString();
@@ -93,7 +89,6 @@ public class AddItemsActivity extends AppCompatActivity {
             }
         }
         if (!correctInput) {
-
             Toast.makeText(this, "please fill the fields", Toast.LENGTH_LONG).show();
         }
 
@@ -103,7 +98,6 @@ public class AddItemsActivity extends AppCompatActivity {
         }
 
         if (correctInput) {
-
             adapter.addItemsToAdapter(itemNameNew, shopNameNew, quantityNew, detailsNew);
 
             itemNameNew_ET.setText("");

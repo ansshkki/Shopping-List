@@ -17,101 +17,53 @@
         android:layoutDirection="ltr"
         android:orientation="vertical">
 
-
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_margin="4dp"
+            android:hint="Item name">
 
-            <TextView
-                android:layout_width="3dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="3.5"
-                android:gravity="bottom"
-                android:text="Item name"
-                android:textColor="#000000" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/itemNameNew_ET"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6.5" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-
-
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_margin="4dp"
+            android:hint="Shop name">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="3.5"
-                android:gravity="bottom"
-                android:text="Shop name"
-                android:textColor="#000000" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/shopNameNew_ET"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6.5" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_margin="4dp"
+            android:hint="Quantity">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="3.5"
-                android:gravity="bottom"
-                android:text="Quantity"
-                android:textColor="#000000" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/quantityNew_ET"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6.5" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_margin="4dp"
+            android:hint="Details">
 
-            <TextView
-                android:layout_width="0dp"
-
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="3.5"
-                android:gravity="bottom"
-                android:text="Details"
-                android:textColor="#000000" />
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/detailsNew_ET"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="6.5" />
-
-        </LinearLayout>
-
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:layout_width="wrap_content"
@@ -123,19 +75,11 @@
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
-
-    <LinearLayout
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/new_items_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/new_items_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/new_item_row" />
 
 </LinearLayout>
 
