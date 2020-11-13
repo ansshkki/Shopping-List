@@ -77,10 +77,10 @@ public class AddItemsActivity extends AppCompatActivity {
         boolean correctInput = true;
         EditText[] editTexts = {itemNameNew_ET, shopNameNew_ET, quantityNew_ET};
 
-        itemNameNew = itemNameNew_ET.getText().toString();
-        shopNameNew = shopNameNew_ET.getText().toString();
-        quantityNew = quantityNew_ET.getText().toString();
-        detailsNew = detailsNew_ET.getText().toString();
+        itemNameNew = itemNameNew_ET.getText().toString().trim();
+        shopNameNew = shopNameNew_ET.getText().toString().trim();
+        quantityNew = quantityNew_ET.getText().toString().trim();
+        detailsNew = detailsNew_ET.getText().toString().trim();
 
         for (EditText editText : editTexts) {
             if (editText.getText().toString().isEmpty()) {
