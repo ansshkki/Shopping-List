@@ -106,6 +106,7 @@ public class AddItemsActivity extends AppCompatActivity {
             detailsNew_ET.setText("");
         }
 
+        itemNameNew_ET.requestFocus();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
