@@ -13,6 +13,7 @@ import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,11 +60,27 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
         setSupportActionBar(toolbar);
 
+        ProgressBar loading = findViewById(R.id.loading_indicator);
+        ExtendedFloatingActionButton fab = findViewById(R.id.fab_add);
+        fab.setOnClickListener(v -> startActivity(new Intent(this, AddItemsActivity.class)));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    fab.shrink();
+                } else {
+                    fab.extend();
+                }
+            }
+        });
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(FirebaseAuth.getInstance().getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                loading.setVisibility(View.GONE);
                 newItems.clear();
                 for (DataSnapshot ds : snapshot.getChildren())
                     newItems.add(ds.getValue(Item.class));
@@ -83,10 +101,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.add_item) {
-            Intent i = new Intent(this, AddItemsActivity.class);
-            startActivity(i);
-        } else if (item.getItemId() == R.id.sign_out) {
+        if (item.getItemId() == R.id.sign_out) {
             FirebaseAuth.getInstance().signOut();
             finish();
             startActivity(new Intent(this, LoginActivity.class));
