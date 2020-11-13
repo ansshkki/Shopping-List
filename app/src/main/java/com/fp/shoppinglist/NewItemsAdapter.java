@@ -44,9 +44,9 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.newIte
         holder.details.setText(current.getDetails());
         holder.item_name.setText(current.getName());
         holder.quantity.setText(current.getQuantity());
-        holder.imageView.setOnClickListener(view -> {
+        holder.delete.setOnClickListener(view -> {
             newItems.remove(position);
-            notifyDataSetChanged();
+            notifyItemRemoved(holder.getAdapterPosition());
         });
 
     }
@@ -59,14 +59,14 @@ public class NewItemsAdapter extends RecyclerView.Adapter<NewItemsAdapter.newIte
     public static class newItemsViewHolder extends RecyclerView.ViewHolder {
 
         TextView item_name, details, quantity;
-        ImageView imageView;
+        ImageView delete;
 
         public newItemsViewHolder(@NonNull View view) {
             super(view);
             item_name = view.findViewById(R.id.new_item_name_text_view);
             details = view.findViewById(R.id.new_details_text_view);
             quantity = view.findViewById(R.id.new_quantity_text_view);
-            imageView = view.findViewById(R.id.delete);
+            delete = view.findViewById(R.id.delete);
         }
     }
 

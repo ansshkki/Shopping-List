@@ -26,6 +26,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/itemNameNew_ET"
                 android:layout_width="match_parent"
+                android:inputType="textPersonName"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,6 +39,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/shopNameNew_ET"
                 android:layout_width="match_parent"
+                android:inputType="textPersonName"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -50,6 +52,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/quantityNew_ET"
                 android:layout_width="match_parent"
+                android:inputType="textShortMessage"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
