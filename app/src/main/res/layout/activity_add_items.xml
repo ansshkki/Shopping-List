@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layoutDirection="ltr"
     android:orientation="vertical"
     tools:context=".AddItemsActivity">
@@ -34,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:hint="Shop name">
+            android:hint="Section">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/shopNameNew_ET"
@@ -70,13 +71,14 @@
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:layout_width="wrap_content"
+        <!-- TEMPORARY -->
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:onClick="addToNew"
-            android:text="+"
+            app:icon="@drawable/ic_down"
             android:textColor="#FFFFFF" />
     </LinearLayout>
 
